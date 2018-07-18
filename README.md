@@ -1,10 +1,7 @@
 # convolutional-neural-network-with-numpy
 A convolutional neural network implemented with python and only numpy. This is also my assigment for the course "B55.2 WT Ausgewählte Kapitel sozialer Webtechnologien" at "HTW-Berlin"
 
-## Getting Started
-These instructions will get you a copy of the project up and running a simple convolutional neural network on your local machine.
-
-### Prerequisites
+## Prerequisites
 Make sure numpy is installed. Below should work
 ```
 python -m pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose
@@ -15,10 +12,10 @@ Also your data shape would have the shape
 ```
 with m beeing the number of images, c beeing the color channel and w, h beeing width and height. Note that this network will only run with squared images so width has to be equal to height
 
-### Building a model
+## Building a model
 You have to define an custom network architecture by stacking layers and activation functions. Currently following layers and loss functons are implemented
 
-#### Activation functions
+### Activation functions
 * ReLU
 * Leaky ReLU
 * Parametric ReLU
@@ -26,16 +23,17 @@ You have to define an custom network architecture by stacking layers and activat
 * Tanh
 * Sigmoid
 
-#### Layers
+### Layers
 * Flatten
 * Fully Connected Layers
 * Convolution layer
 * Pooling layer
 * Dropout layer
 
-#### Loss functions
+### Loss functions
 * Cross entropy with softmax loss
 
+### Creating a model
 with these options in mind you can create a convolutional neural network e.g.
 ```python
 def fcn():
@@ -61,13 +59,13 @@ def fcn():
 fcn = NeuralNetwork(fcn, score_func=LossCriteria.softmax)
 ```
 
-#### Training the model
+## Training the model
 After defining a model you can start training it by selecting one of the optimizers and set up their hyperparametres.
 ```python
 fcn = Optimizer.adam(fcn, X_train, y_train, LossCriteria.mean_squared, batch_size=64,
                     epoch=50, learning_rate=0.001, X_test=X_test, y_test=y_test, verbose=True)
 ```
-#### Optimizers
+### Optimizers
 * SGD
 * SGD + momentum
 * SGD + nesterov momentum
