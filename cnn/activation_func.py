@@ -36,7 +36,7 @@ class ReLU():
 class LeakyReLU():
     ''' Implements activation function leaky rectified linear unit (Leaky ReLU)
 
-    Leaky ReLU activation function is defined as max(x,a*x) or max(x,0.01*x) in our case.
+    Leaky ReLU activation function is defined as max(x,0.01*x).
     '''
 
     def __init__(self):
@@ -62,6 +62,70 @@ class LeakyReLU():
         dX = dout.copy()
         dX[self.X <= 0] = 0.01 * dX[self.X <= 0]
         return dX, []
+    
+class ParametricReLU():
+    ''' Implements activation function parametric rectified linear unit (Leaky ReLU)
+
+    Parametric ReLU activation function is defined as x for x < 0 and else a * x
+    '''
+
+    def __init__(self, a):
+        self.params = []
+		self. a = a
+
+    def forward(self, X):
+        ''' In the forward pass return the identity for x < 0 and else x*a
+
+        Safe input for backprop and forward all values that are above 0.
+        '''
+        self.X = X
+		X[X <= 0] = self.a * X[X <= 0]
+        return X
+
+    def backward(self, dout):
+        ''' calulate the backward path (local gradient of our function) for backpropagation
+
+        Returns:
+            dX: for all x \elem X <= 0 in forward pass
+                return a * x else x (local gradient)
+
+            []: no gradients (global) on ReLU operation
+        '''
+        dX = dout.copy()
+        dX[self.X <= 0] = self.a * dX[self.X <= 0]
+        return dX, []    
+
+class ExponentialReLU():
+    ''' Implements activation function exponential rectified linear unit (Leaky ReLU)
+
+    Exponential ReLU activation function is defined as x for x > 0 and a*(exp(x) - 1) else.
+    '''
+
+    def __init__(self, a):
+        self.params = []
+		self. a = a
+
+    def forward(self, X):
+        ''' In the forward pass return the identity for x < 0 and else a*(exp(x) - 1)
+
+        Safe input for backprop and forward all values that are above 0.
+        '''
+        self.X = X
+		X[X <= 0] = self.a * (np.exp(X[X <= 0]) - 1)
+        return X
+
+    def backward(self, dout):
+        ''' calulate the backward path (local gradient of our function) for backpropagation
+
+        Returns:
+            dX: for all x \elem X <= 0 in forward pass
+                return a * x else x (local gradient)
+
+            []: no gradients (global) on ReLU operation
+        '''
+        dX = dout.copy()
+        dX[self.X <= 0] = self.a * (np.exp(dX[self.X <= 0]) - 1)
+        return dX, []    
 
 
 class sigmoid():
