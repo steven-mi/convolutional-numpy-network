@@ -1,5 +1,5 @@
 import numpy as np
-from numpy-cnn.loss_func import LossCriteria
+from cnn.loss_func import LossCriteria
 
 class NeuralNetwork:
     ''' Creates a neural network from a given layer architecture
