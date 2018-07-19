@@ -79,7 +79,7 @@ class ParametricReLU():
         Safe input for backprop and forward all values that are above 0.
         '''
         self.X = X
-		X[X <= 0] = self.a * X[X <= 0]
+	X[X <= 0] = self.a * X[X <= 0]
         return X
 
     def backward(self, dout):
@@ -111,7 +111,7 @@ class ExponentialReLU():
         Safe input for backprop and forward all values that are above 0.
         '''
         self.X = X
-		X[X <= 0] = self.a * (np.exp(X[X <= 0]) - 1)
+	X[X <= 0] = self.a * (np.exp(X[X <= 0]) - 1)
         return X
 
     def backward(self, dout):
