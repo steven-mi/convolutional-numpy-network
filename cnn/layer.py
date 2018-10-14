@@ -267,6 +267,9 @@ class Dropout():
 
 
 class Helper():
+    '''
+    Helper class from https://github.com/huyouare/CS231n/blob/master/assignment2/cs231n/im2col.py
+    '''
 
     def __init__(self):
         None
